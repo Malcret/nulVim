@@ -10,6 +10,8 @@ M.wich_key = {
     { "gs", group = "Surround", mode = { "n", "v" } },
     { "<leader>c", group = "Code", mode = { "n", "v" } },
     { "<leader>d", group = "DAP/Document" },
+    { "<leader>g", group = "Git" },
+    { "<leader>gh", group = "Hunk" },
     { "<leader>r", group = "Rename" },
     { "<leader>s", group = "Search" },
     { "<leader>w", group = "Workspace" },
@@ -128,18 +130,17 @@ M.gitsigns = function(buffer)
 
     -- ACTIONS
 
-    set("v", "<leader>hs", function() gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") }) end, { desc = "[Git] Stage hunk" })
-    set("v", "<leader>hr", function() gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") }) end, { desc = "[Git] Reset hunk" })
-
-    set("n", "<leader>hs", function() gs.stage_hunk() end, { desc = "[Git] Stage hunk" })
-    set("n", "<leader>hr", function() gs.reset_hunk() end, { desc = "[Git] Reset hunk" })
-    set("n", "<leader>hS", function() gs.stage_buffer() end, { desc = "[Git] Stage buffer" })
-    set("n", "<leader>hR", function() gs.reset_buffer() end, { desc = "[Git] Reset buffer" })
-    set("n", "<leader>hp", function() gs.preview_hunk() end, { desc = "[Git] Preview hunk" })
-    set("n", "<leader>hi", function() gs.preview_hunk_inline() end, { desc = "[Git] Preview hunk inline" })
-    set("n", "<leader>hb", function() gs.blame_line() end, { desc = "[Git] Blame line" })
-    set("n", "<leader>hd", function() gs.diffthis() end, { desc = "[Git] Diff against index" })
-    set("n", "<leader>hD", function() gs.diffthis("@") end, { desc = "[Git] Diff against last commit" })
+    set("v", "<leader>ghs", function() gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") }) end, { desc = "[Git] Stage hunk" })
+    set("v", "<leader>ghr", function() gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") }) end, { desc = "[Git] Reset hunk" })
+    set("n", "<leader>ghs", function() gs.stage_hunk() end, { desc = "[Git] Stage hunk" })
+    set("n", "<leader>ghr", function() gs.reset_hunk() end, { desc = "[Git] Reset hunk" })
+    set("n", "<leader>ghS", function() gs.stage_buffer() end, { desc = "[Git] Stage buffer" })
+    set("n", "<leader>ghR", function() gs.reset_buffer() end, { desc = "[Git] Reset buffer" })
+    set("n", "<leader>ghp", function() gs.preview_hunk() end, { desc = "[Git] Preview hunk" })
+    set("n", "<leader>ghi", function() gs.preview_hunk_inline() end, { desc = "[Git] Preview hunk inline" })
+    set("n", "<leader>ghb", function() gs.blame_line() end, { desc = "[Git] Blame line" })
+    set("n", "<leader>ghd", function() gs.diffthis() end, { desc = "[Git] Diff this" })
+    set("n", "<leader>ghD", function() gs.diffthis("~") end, { desc = "[Git] Diff against ~HEAD" })
 
     -- TOGGLE
 
