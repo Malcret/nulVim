@@ -27,4 +27,11 @@ return {
             require("config.keymaps").telescope()
         end,
     },
+    {
+        "folke/snacks.nvim",
+        opts = {
+            picker = { enabled = true },
+        },
+        keys = MltVim.config.keymaps.snacks_picker,
+    },
 }
