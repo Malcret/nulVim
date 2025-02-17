@@ -13,6 +13,7 @@ return {
         input = { enabled = true },
         lazygit = { enabled = true },
         scope = { enabled = true },
+        statuscolumn = { enabled = true },
         terminal = { enabled = true },
     },
     config = function(_, opts)
