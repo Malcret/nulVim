@@ -207,6 +207,14 @@ M.mini_surround = {
 
 -- SNACKS
 
+M.snacks_lazygit = function()
+    local snacks = require("snacks")
+
+    if vim.fn.executable("lazygit") then
+        set("n", "<leader>gG", function() snacks.lazygit() end, { desc = "Lazygit in cwd" })
+    end
+end
+
 M.snacks_terminal = function()
     local snacks = require("snacks")
 
