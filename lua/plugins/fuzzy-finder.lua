@@ -1,5 +1,4 @@
 return {
-    -- TODO: Try fzf-lua
     {
         "nvim-telescope/telescope.nvim",
         event = "VimEnter",
