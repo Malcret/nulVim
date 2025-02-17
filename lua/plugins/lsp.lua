@@ -112,12 +112,6 @@ return {
                         })
                     end
 
-                    -- Clear augroup on LSP detach
-                    vim.api.nvim_create_autocmd({ "LspDetach" }, {
-                        group = vim.api.nvim_create_augroup("mltvim_lsp_attach", { clear = true }),
-                        callback = function(event2) vim.api.nvim_clear_autocmds({ buffer = event2.buf }) end,
-                    })
-
                     -- Load keymaps
                     MltVim.config.keymaps.lsp(buffer, client)
                 end,
