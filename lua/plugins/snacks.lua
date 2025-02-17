@@ -9,6 +9,7 @@ return {
         indent = {
             enabled = true,
             animate = { enabled = false },
+            scope = { underline = true },
         },
         input = { enabled = true },
         lazygit = { enabled = true },
