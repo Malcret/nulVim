@@ -18,7 +18,8 @@ return {
         terminal = { enabled = true },
     },
     config = function(_, opts)
-        require("snacks").setup(opts)
+        _G.Snacks = require("snacks")
+        Snacks.setup(opts)
 
         if opts.lazygit.enabled then MltVim.config.keymaps.snacks_lazygit() end
         if opts.terminal.enabled then MltVim.config.keymaps.snacks_terminal() end
