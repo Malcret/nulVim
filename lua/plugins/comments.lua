@@ -12,7 +12,7 @@ return {
         config = function(_, opts)
             require("todo-comments").setup(opts)
 
-            MltVim.config.keymaps.todo_comments()
+            nulVim.config.keymaps.todo_comments()
         end,
     },
 }

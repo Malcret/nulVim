@@ -21,7 +21,7 @@ return {
         "echasnovski/mini.surround",
         version = false,
         keys = function(_, keys)
-            local opts = MltVim.get_plugin_opts("mini.surround")
+            local opts = nulVim.get_plugin_opts("mini.surround")
 
             local mappings = {
                 { opts.mappings.add, desc = "Add surrounding", mode = { "n", "v" } },
@@ -37,7 +37,7 @@ return {
             return vim.list_extend(mappings, keys)
         end,
         opts = {
-            mappings = MltVim.config.keymaps.mini_surround,
+            mappings = nulVim.config.keymaps.mini_surround,
         },
     },
 }

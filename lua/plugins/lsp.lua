@@ -19,10 +19,10 @@ return {
                 severity_sort = true,
                 signs = {
                     text = {
-                        [vim.diagnostic.severity.ERROR] = MltVim.config.icons.diagnostics.Error,
-                        [vim.diagnostic.severity.WARN] = MltVim.config.icons.diagnostics.Warn,
-                        [vim.diagnostic.severity.HINT] = MltVim.config.icons.diagnostics.Hint,
-                        [vim.diagnostic.severity.INFO] = MltVim.config.icons.diagnostics.Info,
+                        [vim.diagnostic.severity.ERROR] = nulVim.config.icons.diagnostics.Error,
+                        [vim.diagnostic.severity.WARN] = nulVim.config.icons.diagnostics.Warn,
+                        [vim.diagnostic.severity.HINT] = nulVim.config.icons.diagnostics.Hint,
+                        [vim.diagnostic.severity.INFO] = nulVim.config.icons.diagnostics.Info,
                     },
                 },
             },
@@ -113,14 +113,14 @@ return {
                     end
 
                     -- Load keymaps
-                    MltVim.config.keymaps.lsp(buffer, client)
+                    nulVim.config.keymaps.lsp(buffer, client)
                 end,
             })
 
             -- Set diagnostics icon
             if type(opts.diagnostics.virtual_text) == "table" and opts.diagnostics.virtual_text.prefix == "icons" then
                 opts.diagnostics.virtual_text.prefix = function(diagnostic)
-                    local icons = MltVim.config.icons.diagnostics
+                    local icons = nulVim.config.icons.diagnostics
                     for d, icon in pairs(icons) do
                         if diagnostic.severity == vim.diagnostic.severity[d:upper()] then return icon end
                     end
@@ -176,7 +176,7 @@ return {
     {
         "folke/trouble.nvim",
         cmd = "Trouble",
-        keys = MltVim.config.keymaps.trouble,
+        keys = nulVim.config.keymaps.trouble,
         ---@module "trouble"
         ---@type trouble.Config
         opts = {

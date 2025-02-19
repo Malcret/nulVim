@@ -18,7 +18,7 @@ return {
                 topdelete = { text = "" },
                 changedelete = { text = "▎" },
             },
-            on_attach = function(buffer) MltVim.config.keymaps.gitsigns(buffer) end,
+            on_attach = function(buffer) nulVim.config.keymaps.gitsigns(buffer) end,
         },
     },
     },
