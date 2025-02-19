@@ -31,6 +31,6 @@ return {
         opts = {
             picker = { enabled = true },
         },
-        keys = MltVim.config.keymaps.snacks_picker,
+        keys = nulVim.config.keymaps.snacks_picker,
     },
 }

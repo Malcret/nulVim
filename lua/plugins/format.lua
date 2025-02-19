@@ -2,7 +2,7 @@ return {
     "stevearc/conform.nvim",
     event = "BufWritePre",
     cmd = "ConformInfo",
-    keys = MltVim.config.keymaps.conform,
+    keys = nulVim.config.keymaps.conform,
     ---@module "conform"
     ---@type conform.setupOpts
     opts = {

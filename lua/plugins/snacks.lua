@@ -21,7 +21,7 @@ return {
         _G.Snacks = require("snacks")
         Snacks.setup(opts)
 
-        if opts.lazygit.enabled then MltVim.config.keymaps.snacks_lazygit() end
-        if opts.terminal.enabled then MltVim.config.keymaps.snacks_terminal() end
+        if opts.lazygit.enabled then nulVim.config.keymaps.snacks_lazygit() end
+        if opts.terminal.enabled then nulVim.config.keymaps.snacks_terminal() end
     end,
 }

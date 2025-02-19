@@ -10,10 +10,10 @@ return {
                 opts = {},
             },
         },
-        keys = MltVim.config.keymaps.dap,
+        keys = nulVim.config.keymaps.dap,
         config = function()
             -- Set DAP icons
-            for name, sign in pairs(MltVim.config.icons.dap) do
+            for name, sign in pairs(nulVim.config.icons.dap) do
                 sign = type(sign) == "table" and sign or { sign }
                 vim.fn.sign_define(
                     "Dap" .. name,
@@ -33,7 +33,7 @@ return {
         dependencies = {
             "nvim-neotest/nvim-nio",
         },
-        keys = MltVim.config.keymaps.dap_ui,
+        keys = nulVim.config.keymaps.dap_ui,
         opts = {},
         config = function(_, opts)
             local dap = require("dap")

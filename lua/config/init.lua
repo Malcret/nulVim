@@ -1,10 +1,10 @@
-_G.MltVim = require("utils")
+_G.nulVim = require("utils")
 
-MltVim.config = {}
-MltVim.config.keymaps = require("config.keymaps")
-MltVim.config.icons = require("config.icons")
+nulVim.config = {}
+nulVim.config.keymaps = require("config.keymaps")
+nulVim.config.icons = require("config.icons")
 
-MltVim.config.keymaps.nvim()
+nulVim.config.keymaps.nvim()
 require("config.options")
 require("config.autocmds")
 require("config.lazy")

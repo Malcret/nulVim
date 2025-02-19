@@ -6,6 +6,6 @@ return {
         ---@type Flash.Config
         ---@diagnostic disable-next-line: missing-fields
         opts = {},
-        keys = MltVim.config.keymaps.flash,
+        keys = nulVim.config.keymaps.flash,
     },
 }
