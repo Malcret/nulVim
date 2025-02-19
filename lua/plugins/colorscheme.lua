@@ -13,13 +13,7 @@ return {
             -- diffview = true,
             flash = true,
             fidget = true,
-            -- fzf = true,
             gitsigns = true,
-            indent_blankline = {
-                enabled = true,
-                scope_color = "lavender",
-                colored_indent_levels = false,
-            },
             lsp_trouble = true,
             mason = true,
             native_lsp = {
@@ -42,7 +36,6 @@ return {
                     background = true,
                 },
             },
-            -- neogit = true,
             -- rainbow_delimiters = true,
             snacks = true,
             treesitter = true,
