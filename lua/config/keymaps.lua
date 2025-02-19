@@ -159,37 +159,42 @@ M.lsp = function(buffer, client)
     -- GOTO
 
     -- Goto the definition of the word under the cursor.
-    set("n", "gd", tsbi.lsp_definitions, { buffer = buffer, desc = "[LSP] Goto Definition" })
+    set("n", "gd", function() Snacks.picker.lsp_definitions() end, { buffer = buffer, desc = "Goto Definition" })
     -- Goto the declaration of the word under the cursor.
-    set("n", "gD", vim.lsp.buf.declaration, { buffer = buffer, desc = "[LSP] Goto Declaration" })
+    set("n", "gD", function() Snacks.picker.lsp_declarations() end, { buffer = buffer, desc = "Goto Declaration" })
     -- Goto the implementation of the word under the cursor.
-    set("n", "gI", tsbi.lsp_implementations, { buffer = buffer, desc = "[LSP] Goto Implementation" })
+    set("n", "gI", function() Snacks.picker.lsp_implementations() end, { buffer = buffer, desc = "Goto Implementation" })
     -- Goto the definition of the type of the word under the cursor.
-    set("n", "<leader>D", tsbi.lsp_type_definitions, { buffer = buffer, desc = "[LSP] Goto type definition" })
+    set("n", "gy", function() Snacks.picker.lsp_type_definitions() end, { buffer = buffer, desc = "Goto Type Definition" })
+
+    -- FIND
+
+    -- Find references of the word under the cursor.
+    set("n", "gr", function() Snacks.picker.lsp_references() end, { buffer = buffer, desc = "Find References" })
 
     -- SEARCH
 
     -- Search LSP symbols in the current buffer.
-    set("n", "<leader>ds", tsbi.lsp_document_symbols, { buffer = buffer, desc = "[LSP] Find document symbols" })
+    set("n", "<leader>ss", function() Snacks.picker.lsp_symbols() end, { buffer = buffer, desc = "Search LSP Symbols" })
     -- Search LSP symbols in the entire workspace.
-    set("n", "<leader>ws", tsbi.lsp_dynamic_workspace_symbols, { buffer = buffer, desc = "[LSP] Find workspace symbols" })
+    set("n", "<leader>sS", function() Snacks.picker.lsp_workspace_symbols() end, { buffer = buffer, desc = "Search LSP Workspace Symbols" })
 
     -- CODE EDIT
 
     -- Renames all references to the symbol under the cursor.
-    set("n", "<leader>rn", vim.lsp.buf.rename, { buffer = buffer, desc = "[LSP] Rename symbol" })
-    set({ "n", "x" }, "<leader>ca", vim.lsp.buf.code_action, { buffer = buffer, desc = "[LSP] Code action" })
+    set("n", "<leader>rn", vim.lsp.buf.rename, { buffer = buffer, desc = "Rename Symbol" })
+    set({ "n", "x" }, "<leader>ca", vim.lsp.buf.code_action, { buffer = buffer, desc = "Code Action" })
 
     -- INFORMATIONS
 
     -- Show hover informations about the word under the cursor.
     if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_hover, buffer) then
-        set("n", "K", vim.lsp.buf.hover, { buffer = buffer, desc = "[LSP] Hover informations" })
+        set("n", "K", vim.lsp.buf.hover, { buffer = buffer, desc = "Hover Informations" })
     end
 
     -- Show signature informations about the word under the cursor.
     if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_signatureHelp, buffer) then
-        set("n", "<leader>K", vim.lsp.buf.signature_help, { buffer = buffer, desc = "[LSP] Signature informations" })
+        set("n", "gK", vim.lsp.buf.signature_help, { buffer = buffer, desc = "Signature Informations" })
     end
 end
 
@@ -206,7 +211,6 @@ M.mini_surround = {
 }
 
 -- SNACKS
-
 M.snacks_lazygit = function()
     local snacks = require("snacks")
 
@@ -214,12 +218,58 @@ M.snacks_lazygit = function()
         set("n", "<leader>gG", function() snacks.lazygit() end, { desc = "Lazygit in cwd" })
     end
 end
+end
 
 -- stylua: ignore
 M.snacks_picker = {
+    -- Top Pickers & Explorer
     { "<leader><space>", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
-    { "<leader>,", function() Snacks.picker.buffers() end, desc = "Buffers" },
+    { "<leader>,", function() Snacks.picker.buffers() end, desc = "Search Buffers" },
     { "<leader>/", function() Snacks.picker.grep() end, desc = "Grep" },
+    { "<leader>:", function() Snacks.picker.command_history() end, desc = "Search Command History" },
+    { "<leader>n", function() Snacks.picker.notifications() end, desc = "Search Notification History" },
+    -- { "<leader>e", function() Snacks.explorer() end, desc = "File Explorer" },
+    -- Find
+    { "<leader>fb", function() Snacks.picker.buffers() end, desc = "Find Buffers" },
+    ---@diagnostic disable-next-line: assign-type-mismatch
+    { "<leader>fc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
+    { "<leader>ff", function() Snacks.picker.files() end, desc = "Find Files" },
+    { "<leader>fg", function() Snacks.picker.git_files() end, desc = "Find Git Files" },
+    { "<leader>fp", function() Snacks.picker.projects() end, desc = "Find Projects" },
+    { "<leader>fr", function() Snacks.picker.recent() end, desc = "Find Recent" },
+    -- Git
+    { "<leader>gb", function() Snacks.picker.git_branches() end, desc = "Search Git Branches" },
+    { "<leader>gl", function() Snacks.picker.git_log() end, desc = "Search Git Log" },
+    { "<leader>gL", function() Snacks.picker.git_log_line() end, desc = "Search Git Log Line" },
+    { "<leader>gs", function() Snacks.picker.git_status() end, desc = "Search Git Status" },
+    { "<leader>gS", function() Snacks.picker.git_stash() end, desc = "Search Git Stash" },
+    { "<leader>gd", function() Snacks.picker.git_diff() end, desc = "Search Git Diff (Hunks)" },
+    { "<leader>gf", function() Snacks.picker.git_log_file() end, desc = "Search Git Log File" },
+    -- Grep
+    { "<leader>sb", function() Snacks.picker.lines() end, desc = "Grep Buffer Lines" },
+    { "<leader>sB", function() Snacks.picker.grep_buffers() end, desc = "Grep Open Buffers" },
+    { "<leader>sg", function() Snacks.picker.grep() end, desc = "Grep" },
+    { "<leader>sw", function() Snacks.picker.grep_word() end, desc = "Grep Visual selection or word", mode = { "n", "x" } },
+    -- Search
+    { '<leader>s"', function() Snacks.picker.registers() end, desc = "Search Registers" },
+    { '<leader>s/', function() Snacks.picker.search_history() end, desc = "Search Search History" },
+    { "<leader>sa", function() Snacks.picker.autocmds() end, desc = "Search Autocmds" },
+    { "<leader>sc", function() Snacks.picker.command_history() end, desc = "Search Command History" },
+    { "<leader>sC", function() Snacks.picker.commands() end, desc = "Search Commands" },
+    { "<leader>sd", function() Snacks.picker.diagnostics() end, desc = "Search Diagnostics" },
+    { "<leader>sD", function() Snacks.picker.diagnostics_buffer() end, desc = "Search Buffer Diagnostics" },
+    { "<leader>sh", function() Snacks.picker.help() end, desc = "Search Help Pages" },
+    { "<leader>sH", function() Snacks.picker.highlights() end, desc = "Search Highlights" },
+    { "<leader>si", function() Snacks.picker.icons() end, desc = "Search Icons" },
+    { "<leader>sj", function() Snacks.picker.jumps() end, desc = "Search Jumps" },
+    { "<leader>sk", function() Snacks.picker.keymaps() end, desc = "Search Keymaps" },
+    { "<leader>sl", function() Snacks.picker.loclist() end, desc = "Search Location List" },
+    { "<leader>sm", function() Snacks.picker.marks() end, desc = "Search Marks" },
+    { "<leader>sM", function() Snacks.picker.man() end, desc = "Search Man Pages" },
+    { "<leader>sp", function() Snacks.picker.lazy() end, desc = "Search Search for Plugin Spec" },
+    { "<leader>sq", function() Snacks.picker.qflist() end, desc = "Search Quickfix List" },
+    { "<leader>sR", function() Snacks.picker.resume() end, desc = "Search Resume" },
+    { "<leader>su", function() Snacks.picker.undo() end, desc = "Search Undo History" },
 }
 
 M.snacks_terminal = function()
@@ -265,9 +315,11 @@ M.todo_comments = function()
     -- FUZZY SEARCH
 
     -- Fuzzy search for todo comments in the entire workspace.
-    set("n", "<leader>st", "<cmd>TodoTelescope<cr>", { desc = "[Todo] Search todo comments" })
+    ---@diagnostic disable-next-line: undefined-field
+    set("n", "<leader>st", function() Snacks.picker.todo_comments() end, { desc = "Search Todo Comments" })
     -- Fuzzy search for todo/fix/fixme comments in the entire workspace.
-    set("n", "<leader>sT", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>", { desc = "[Todo] Search todo/fix/fixme comments" })
+    ---@diagnostic disable-next-line: undefined-field
+    set("n", "<leader>sT", function() Snacks.picker.todo_comments({ keywords = { "TODO", "FIX", "FIXME" } }) end, { desc = "Search Todo/Fix/Fixme Comments" })
 
     -- TROUBLE
 

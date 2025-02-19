@@ -45,7 +45,6 @@ return {
             -- neogit = true,
             -- rainbow_delimiters = true,
             snacks = true,
-            telescope = { enabled = true },
             treesitter = true,
             which_key = true,
         },
