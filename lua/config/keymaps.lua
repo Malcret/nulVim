@@ -4,7 +4,6 @@ local M = {}
 
 -- WICH-KEY GROUPS
 
--- stylua: ignore
 M.wich_key = {
     mode = { "n", "v" },
 
@@ -34,7 +33,7 @@ M.wich_key = {
     },
 
     -- Help
-    { "<leader>?", function() require("which-key").show({ global = false }) end, desc = "[Wich-Key] Buffer keymaps" },
+    { "<leader>?", function() require("which-key").show({ global = false }) end, desc = "Show Buffer Keymaps" },
 }
 
 -- NVIM
@@ -79,7 +78,7 @@ M.conform = {
     -- FORMATTING
 
     -- Format the current buffer using conform.
-    { "<leader>ff", function() require("conform").format({ async = true }) end, mode = { "n", "v" }, desc = "[Conform] Format" },
+    { "<leader>cf", function() require("conform").format({ async = true }) end, mode = { "n", "v" }, desc = "Format Buffer" },
 }
 
 -- DAP
@@ -135,33 +134,33 @@ M.gitsigns = function(buffer)
         else
             gs.nav_hunk("next")
         end
-    end, { buffer = buffer, desc = "[Git] Jump to next git change" })
+    end, { buffer = buffer, desc = "Next Hunk" })
     set("n", "[c", function()
         if vim.wo.diff then
             vim.cmd.normal({ "[c", bang = true })
         else
             gs.nav_hunk("prev")
         end
-    end, { buffer = buffer, desc = "[Git] Jump to previous git change" })
+    end, { buffer = buffer, desc = "Prev Hunk" })
+    set("n", "]H", function() gs.nav_hunk("last") end, { desc = "Last Hunk" })
+    set("n", "[H", function() gs.nav_hunk("first") end, { desc = "First Hunk" })
 
     -- ACTIONS
 
-    set("v", "<leader>ghs", function() gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") }) end, { desc = "[Git] Stage hunk" })
-    set("v", "<leader>ghr", function() gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") }) end, { desc = "[Git] Reset hunk" })
-    set("n", "<leader>ghs", function() gs.stage_hunk() end, { desc = "[Git] Stage hunk" })
-    set("n", "<leader>ghr", function() gs.reset_hunk() end, { desc = "[Git] Reset hunk" })
-    set("n", "<leader>ghS", function() gs.stage_buffer() end, { desc = "[Git] Stage buffer" })
-    set("n", "<leader>ghR", function() gs.reset_buffer() end, { desc = "[Git] Reset buffer" })
-    set("n", "<leader>ghp", function() gs.preview_hunk() end, { desc = "[Git] Preview hunk" })
-    set("n", "<leader>ghi", function() gs.preview_hunk_inline() end, { desc = "[Git] Preview hunk inline" })
-    set("n", "<leader>ghb", function() gs.blame_line() end, { desc = "[Git] Blame line" })
-    set("n", "<leader>ghd", function() gs.diffthis() end, { desc = "[Git] Diff this" })
-    set("n", "<leader>ghD", function() gs.diffthis("~") end, { desc = "[Git] Diff against ~HEAD" })
+    set({ "n", "v" }, "<leader>ghs", "<cmd>Gitsigns stage_hunk<cr>", { desc = "Stage Hunk" })
+    set({ "n", "v" }, "<leader>ghr", "<cmd>Gitsigns reset_hunk<cr>", { desc = "Reset Hunk" })
+    set("n", "<leader>ghS", function() gs.stage_buffer() end, { desc = "Stage Buffer" })
+    set("n", "<leader>ghR", function() gs.reset_buffer() end, { desc = "Reset Buffer" })
+    set("n", "<leader>ghp", function() gs.preview_hunk() end, { desc = "Preview Hunk" })
+    set("n", "<leader>ghi", function() gs.preview_hunk_inline() end, { desc = "Preview Hunk Inline" })
+    set("n", "<leader>ghb", function() gs.blame_line() end, { desc = "Blame Line" })
+    set("n", "<leader>ghd", function() gs.diffthis() end, { desc = "Diff This" })
+    set("n", "<leader>ghD", function() gs.diffthis("~") end, { desc = "Diff This ~HEAD" })
 
     -- TOGGLE
 
-    set("n", "<leader>tb", gs.toggle_current_line_blame, { desc = "[Git] Toggle current line blame" })
-    set("n", "<leader>tw", gs.toggle_word_diff, { desc = "[Git] Toggle current word diff" })
+    set("n", "<leader>tb", gs.toggle_current_line_blame, { desc = "Toggle Line Blame" })
+    set("n", "<leader>tw", gs.toggle_word_diff, { desc = "Toggle Word Diff" })
 end
 
 -- LSP
@@ -170,8 +169,6 @@ end
 ---@param client? vim.lsp.Client
 -- stylua: ignore
 M.lsp = function(buffer, client)
-    local tsbi = require("telescope.builtin")
-
     -- GOTO
 
     -- Goto the definition of the word under the cursor.
@@ -227,13 +224,13 @@ M.mini_surround = {
 }
 
 -- SNACKS
-M.snacks_lazygit = function()
-    local snacks = require("snacks")
 
+-- stylua: ignore
+M.snacks_lazygit = function()
     if vim.fn.executable("lazygit") then
-        set("n", "<leader>gG", function() snacks.lazygit() end, { desc = "Lazygit in cwd" })
+        -- set("n", "<leader>gg", function() Snacks.lazygit({ cwd = LazyVim.root.git() }) end, { desc = "Lazygit (Root Dir)" })
+        set("n", "<leader>gG", function() Snacks.lazygit() end, { desc = "Lazygit (cwd)" })
     end
-end
 end
 
 -- stylua: ignore
@@ -289,30 +286,7 @@ M.snacks_picker = {
 }
 
 M.snacks_terminal = function()
-    local snacks = require("snacks")
-
-    set("n", "<leader>ft", function() snacks.terminal() end, { desc = "Toggle terminal" })
-end
-
--- TELESCOPE
-
--- stylua: ignore
-M.telescope = function()
-    local tsbi = require("telescope.builtin")
-
-    -- DOCUMENTATION
-
-    -- Fuzzy search for help documentation.
-    set("n", "<leader>sh", tsbi.help_tags, { desc = "[Telescope] Search help documentation" })
-    -- Fuzzy search for man pages.
-    set("n", "<leader>sm", tsbi.man_pages, { desc = "[Telescope] Search man pages" })
-
-    -- FILES
-
-    -- Fuzzy search for files in the current working directory.
-    set("n", "<leader>sf", tsbi.find_files, { desc = "[Telescope] Search files" })
-    -- Fuzzy search for files in the Neovim config directory.
-    set("n", "<leader>sc", function() tsbi.find_files({ cwd = vim.fn.stdpath("config") }) end, { desc = "[Telescope] Search Neovim config files" })
+    set("n", "<leader>tt", function() Snacks.terminal() end, { desc = "Toggle terminal" })
 end
 
 -- TODO-COMMENTS
@@ -324,9 +298,9 @@ M.todo_comments = function()
     -- GOTO
 
     -- Jump to the next todo comment in the current buffer.
-    set("n", "]t", tc.jump_next, { desc = "[Todo] Jump to next todo comment" })
+    set("n", "]t", tc.jump_next, { desc = "Next Todo Comment" })
     -- Jump to the previous todo comment in the current buffer.
-    set("n", "[t", tc.jump_prev, { desc = "[Todo] Jump to previous todo comment" })
+    set("n", "[t", tc.jump_prev, { desc = "Previous Todo Comment" })
 
     -- FUZZY SEARCH
 
@@ -340,9 +314,9 @@ M.todo_comments = function()
     -- TROUBLE
 
     -- Show todo comments in the Trouble window.
-    set("n", "<leader>xt", "<cmd>Trouble todo toggle<cr>", { desc = "[Trouble] Todo comments" })
+    set("n", "<leader>xt", "<cmd>Trouble todo toggle<cr>", { desc = "[Trouble] Todo Comments" })
     -- Show todo/fix/fixme comments in the Trouble window.
-    set("n", "<leader>xT", "<cmd>Trouble todo toggle filter = {tag = {TODO,FIX,FIXME}}<cr>", { desc = "[Trouble] Todo/Fix/Fixme comments" })
+    set("n", "<leader>xT", "<cmd>Trouble todo toggle filter = {tag = {TODO,FIX,FIXME}}<cr>", { desc = "[Trouble] Todo/Fix/Fixme Comments" })
 end
 
 -- TROUBLE
@@ -359,7 +333,7 @@ M.trouble = {
     -- Toggle location list.
     { "<leader>xL", "<cmd>Trouble loclist toggle<cr>", desc = "[Trouble] Location list" },
     -- Toggle quickfix list.
-    { "<leader>xL", "<cmd>Trouble qflist toggle<cr>", desc = "[Trouble] Quickfix list" },
+    { "<leader>xQ", "<cmd>Trouble qflist toggle<cr>", desc = "[Trouble] Quickfix list" },
 }
 
 return M
