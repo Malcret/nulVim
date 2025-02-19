@@ -6,16 +6,32 @@ local M = {}
 
 -- stylua: ignore
 M.wich_key = {
+    mode = { "n", "v" },
+
     -- Groups
-    { "gs", group = "Surround", mode = { "n", "v" } },
-    { "<leader>c", group = "Code", mode = { "n", "v" } },
-    { "<leader>d", group = "DAP/Document" },
+    { "<leader>c", group = "Code" },
+    { "<leader>d", group = "Debug" },
+    { "<leader>f", group = "File/Find" },
     { "<leader>g", group = "Git" },
     { "<leader>gh", group = "Hunk" },
     { "<leader>r", group = "Rename" },
     { "<leader>s", group = "Search" },
-    { "<leader>w", group = "Workspace" },
-    { "<leader>x", group = "Trouble" },
+    { "<leader>x", group = "Diagnostics/Quickfix" },
+    { "[", group = "Prev" },
+    { "]", group = "Next" },
+    { "g", group = "Goto" },
+    { "gs", group = "Surround" },
+    {
+        "<leader>b",
+        group = "Buffer",
+        expand = function() return require("which-key.extras").expand.buf() end,
+    },
+    {
+        "<leader>w",
+        group = "Window",
+        proxy = "<c-w>",
+        expand = function() return require("which-key.extras").expand.win() end,
+    },
 
     -- Help
     { "<leader>?", function() require("which-key").show({ global = false }) end, desc = "[Wich-Key] Buffer keymaps" },
