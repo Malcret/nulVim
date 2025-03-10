@@ -1,14 +1,14 @@
-# Neovim Config v2
+# nulVim
 
-Complete rewrite of my Neovim config.
+Complete rewrite of my old Neovim config.
 
 ## ⚡️ Requirements
 - Neovim >= 0.10.0 (with LuaJIT)
 - Git >= 2.19.0 (for partial clone)
 - a [Nerd Font](https://www.nerdfonts.com/) (for nice icons)
-- luarocks
 - a C compiler and libstdc++ (to build stuff)
 - Make (also to build stuff)
+- Maybe other stuff that I forgot...
 
 ## 📦 Installation
-Just clone the repo in your empty Neovim config directory.
+Clone the repo and use it as your Neovim config directory.
