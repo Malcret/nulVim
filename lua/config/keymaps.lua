@@ -327,23 +327,6 @@ M.lsp = function(buffer, client)
     { buffer = buffer, desc = "Goto Type Definition" }
   )
 
-  -- FIND
-
-  -- Find references of the word under the cursor.
-  map("n", "gr", function() Snacks.picker.lsp_references() end, { buffer = buffer, desc = "Find References" })
-
-  -- SEARCH
-
-  -- Search LSP symbols in the current buffer.
-  map("n", "<leader>ss", function() Snacks.picker.lsp_symbols() end, { buffer = buffer, desc = "Search LSP Symbols" })
-  -- Search LSP symbols in the entire workspace.
-  map(
-    "n",
-    "<leader>sS",
-    function() Snacks.picker.lsp_workspace_symbols() end,
-    { buffer = buffer, desc = "Search LSP Workspace Symbols" }
-  )
-
   -- CODE ACTIONS
 
   -- Renames all references to the symbol under the cursor.
@@ -359,6 +342,11 @@ M.lsp = function(buffer, client)
     map({ "n", "v" }, "<leader>cc", vim.lsp.codelens.run, { buffer = buffer, desc = "Run Codelens" })
     map("n", "<leader>cC", vim.lsp.codelens.refresh, { buffer = buffer, desc = "Refresh Codelens" })
   end
+
+  -- FIND
+
+  -- Find references of the word under the cursor.
+  map("n", "gr", function() Snacks.picker.lsp_references() end, { buffer = buffer, desc = "Find References" })
 
   -- INFORMATIONS
 
@@ -384,6 +372,18 @@ M.lsp = function(buffer, client)
     "<leader>xD",
     function() vim.diagnostic.open_float({ scope = "line" }) end,
     { buffer = buffer, desc = "Show Line Diagnostics" }
+  )
+
+  -- SEARCH
+
+  -- Search LSP symbols in the current buffer.
+  map("n", "<leader>ss", function() Snacks.picker.lsp_symbols() end, { buffer = buffer, desc = "Search LSP Symbols" })
+  -- Search LSP symbols in the entire workspace.
+  map(
+    "n",
+    "<leader>sS",
+    function() Snacks.picker.lsp_workspace_symbols() end,
+    { buffer = buffer, desc = "Search LSP Workspace Symbols" }
   )
 
   -- SERVER
