@@ -374,6 +374,16 @@ M.lsp = function(buffer, client)
     { buffer = buffer, desc = "Show Line Diagnostics" }
   )
 
+  -- TOGGLE
+
+  -- Toggle diagnostics
+  map(
+    "n",
+    "<leader>ctd",
+    function() vim.diagnostic.enable(not vim.diagnostic.is_enabled()) end,
+    { buffer = buffer, desc = "Toggle diagnostics" }
+  )
+
   -- SEARCH
 
   -- Search LSP symbols in the current buffer.
