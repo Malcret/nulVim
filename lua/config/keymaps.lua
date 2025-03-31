@@ -353,7 +353,8 @@ M.lsp = function(buffer, client)
 
   -- Show hover informations about the word under the cursor.
   if nulVim.lsp.has_method(buffer, client, "hover") then
-    map("n", "K", vim.lsp.buf.hover, { buffer = buffer, desc = "Hover Informations" })
+    -- map("n", "K", vim.lsp.buf.hover, { buffer = buffer, desc = "Hover Informations" })
+    map("n", "K", function() require("pretty_hover").hover() end, { buffer = buffer, desc = "Hover Informations" })
   end
 
   -- Show signature informations about the word under the cursor.

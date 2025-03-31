@@ -31,6 +31,14 @@ return {
         documentation = {
           auto_show = true,
           auto_show_delay_ms = 200,
+          draw = function(opts)
+            if opts.item and opts.item.documentation then
+              local out = require("pretty_hover.parser").parse(opts.item.documentation.value)
+              opts.item.documentation.value = out:string()
+            end
+            ---@diagnostic disable-next-line: param-type-mismatch
+            opts.default_implementation(opts)
+          end,
         },
         ghost_text = {
           enabled = false,
