@@ -341,7 +341,7 @@ return {
       require("lazydev").setup(opts)
 
       local blk = require("blink.cmp")
-      blk.add_provider("lazydev", {
+      blk.add_source_provider("lazydev", {
         name = "LazyDev",
         module = "lazydev.integrations.blink",
         score_offset = 100,
