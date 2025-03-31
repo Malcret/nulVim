@@ -6,6 +6,7 @@ return {
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
       "j-hui/fidget.nvim",
+      "Fildo7525/pretty_hover",
     },
     ---@class PluginLspOpts
     opts = {
@@ -382,5 +383,10 @@ return {
       },
     },
     config = function() end,
+  },
+  {
+    "Fildo7525/pretty_hover",
+    lazy = true,
+    opts = {},
   },
 }
