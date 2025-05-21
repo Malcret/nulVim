@@ -59,7 +59,7 @@ return {
             "clangd",
             "--background-index",
             "--clang-tidy",
-            "--header-insertion=never", -- NOTE: Disabled because it offen add useless headers
+            "--header-insertion=never", -- NOTE: Disabled because it often add useless headers
             "--completion-style=detailed",
             "--function-arg-placeholders",
             "--fallback-style=llvm",
