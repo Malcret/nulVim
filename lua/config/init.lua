@@ -76,6 +76,7 @@ function M.setup()
   nulVim.config.keymaps.nvim()
   require("config.options")
   vim.filetype.add({ extension = { h = "c" } })
+  vim.filetype.add({ extension = { bin = "xxd" } })
   require("config.autocmds")
 
   -- LazyFile event
