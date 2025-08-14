@@ -1,6 +1,8 @@
 return {
   {
     "catppuccin/nvim",
+    -- FIX: shitty highlight on master branch
+    version = "v1.11.0",
     enabled = vim.g.colorscheme == "catppuccin",
     lazy = false,
     priority = 1000,
