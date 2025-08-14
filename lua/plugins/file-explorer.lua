@@ -1,6 +1,7 @@
 return {
   {
     "stevearc/oil.nvim",
+    -- NOTE: Need to load during startup or Neovim will use netwr to open directory passed as parameter.
     lazy = false,
     ---@module 'oil'
     ---@type oil.SetupOpts
