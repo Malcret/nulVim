@@ -1,7 +1,9 @@
 return {
   {
     "neovim/nvim-lspconfig",
-    event = "LazyFile",
+    -- NOTE: Need to disable lazy loading, otherwise when loading session with persistence.nvim, the file focus will not
+    -- have an LSP attached.
+    -- event = "LazyFile",
     dependencies = {
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
