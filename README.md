@@ -3,7 +3,7 @@
 Complete rewrite of my old Neovim config.
 
 ## ⚡️ Requirements
-- Neovim >= 0.10.0 (with LuaJIT)
+- Neovim >= 0.11.0 (with LuaJIT)
 - Git >= 2.19.0 (for partial clone)
 - a [Nerd Font](https://www.nerdfonts.com/) (for nice icons)
 - a C compiler and libstdc++ (to build stuff)
