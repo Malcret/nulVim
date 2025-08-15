@@ -21,6 +21,7 @@ return {
         gitsigns = true,
         lsp_trouble = true, -- with my custom colorscheme, it looks better when deactivated
         mason = true,
+        markview = true,
         native_lsp = {
           enabled = true,
           virtual_text = {
@@ -42,7 +43,7 @@ return {
           },
         },
         rainbow_delimiters = true,
-        render_markdown = true,
+        -- render_markdown = true,
         snacks = true,
         treesitter = true,
         which_key = true,
