@@ -43,4 +43,12 @@ function M.map(mode, lhs, rhs, opts)
   vim.keymap.set(mode, lhs, rhs, opts)
 end
 
+---@return boolean
+function M.is_win()
+  if vim.fn.has("g:os") == 0 then
+    return vim.fn.has("win64") == 1 or vim.fn.has("win32") == 1 or vim.fn.has("win16") == 1
+  end
+  return false
+end
+
 return M
