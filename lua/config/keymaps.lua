@@ -17,7 +17,10 @@ M.wich_key = {
   { "<leader>q", group = "Quit" },
   { "<leader>r", group = "Rename" },
   { "<leader>s", group = "Search" },
+  { "<leader>S", group = "Session" },
+  { "<leader>t", group = "Toggle" },
   { "<leader>x", group = "Diagnostics/Quickfix" },
+  { "<leader><tab>", group = "Tab" },
   { "[", group = "Prev" },
   { "]", group = "Next" },
   { "g", group = "Goto" },
@@ -431,7 +434,7 @@ M.oil = {
   {
     "<leader>e",
     function() require("oil").open(vim.uv.cwd(), { preview = { vertical = true } }) end,
-    desc = "File Explorer",
+    desc = "File Explorer (cwd)",
   },
 }
 
