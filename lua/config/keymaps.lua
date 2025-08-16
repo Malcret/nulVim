@@ -56,6 +56,7 @@ M.nvim = function()
   map("n", "]b", "<cmd>bnext<cr>", { desc = "Next Buffer" })
   map("n", "<leader>bn", "<cmd>enew<cr>", { desc = "New Buffer" })
   map("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
+  map("n", "<leader>bs", function() Snacks.picker.buffers() end, { desc = "Search Buffers" })
   map("n", "<leader>bd", function() Snacks.bufdelete() end, { desc = "Delete Buffer" })
   map("n", "<leader>bD", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window" })
   map("n", "<leader>bo", function() Snacks.bufdelete.other() end, { desc = "Delete Other Buffers" })
@@ -451,7 +452,7 @@ M.persistence = {
 
 M.snacks_lazygit = function()
   if vim.fn.executable("lazygit") then
-    -- set("n", "<leader>gg", function() Snacks.lazygit({ cwd = LazyVim.root.git() }) end, { desc = "Lazygit (Root Dir)" })
+    map("n", "<leader>gg", function() Snacks.lazygit({ cwd = nulVim.root.git() }) end, { desc = "Lazygit (Root Dir)" })
     map("n", "<leader>gG", function() Snacks.lazygit() end, { desc = "Lazygit (cwd)" })
   end
 end
