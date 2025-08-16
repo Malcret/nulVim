@@ -240,6 +240,11 @@ M.auto_session = {
     desc = "Toggle auto-save",
   },
   {
+    "<leader>SS",
+    function() require("auto-session").SaveSession() end,
+    desc = "Save session (cwd)",
+  },
+  {
     "<leader>SD",
     function() require("auto-session").DeleteSession() end,
     desc = "Delete session (cwd)",
