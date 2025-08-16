@@ -124,6 +124,10 @@ vim.opt.smartcase = true
 -- See `:help autowrite` for more info.
 vim.opt.autowrite = true
 
+-- SESSION
+
+vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winpos,winsize,terminal,localoptions"
+
 -- SPLIT
 
 -- When on, splitting a window will put the new window below the current one.
