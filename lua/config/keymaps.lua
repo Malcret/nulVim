@@ -205,6 +205,47 @@ M.nvim = function()
   map("n", "<leader>wd", "<C-W>c", { desc = "Delete Window", remap = true })
 end
 
+-- AUTO-SESSION
+
+M.auto_session = {
+  {
+    "<leader>Sl",
+    function() require("auto-session").RestoreSession() end,
+    desc = "Load last session (cwd)",
+  },
+  {
+    "<leader>Ss",
+    function()
+      require("auto-session")
+      vim.cmd("SessionSearch")
+    end,
+    desc = "Select session",
+  },
+  {
+    "<leader>Se",
+    function() require("auto-session").DisableAutoSave(true) end,
+    desc = "Enable auto-save",
+  },
+  {
+    "<leader>Sd",
+    function() require("auto-session").DisableAutoSave() end,
+    desc = "Disable auto-save",
+  },
+  {
+    "<leader>ts",
+    function()
+      require("auto-session")
+      vim.cmd("SessionToggleAutoSave")
+    end,
+    desc = "Toggle auto-save",
+  },
+  {
+    "<leader>SD",
+    function() require("auto-session").DeleteSession() end,
+    desc = "Delete session (cwd)",
+  },
+}
+
 -- CONFORM
 
 M.conform = {
@@ -437,15 +478,6 @@ M.oil = {
     function() require("oil").open(vim.uv.cwd(), { preview = { vertical = true } }) end,
     desc = "File Explorer (cwd)",
   },
-}
-
--- PERSISTENCE
-
-M.persistence = {
-  { "<leader>qs", function() require("persistence").load() end, desc = "Load session from current directory" },
-  { "<leader>qS", function() require("persistence").select() end, desc = "Select session" },
-  { "<leader>ql", function() require("persistence").load({ last = true }) end, desc = "Load last session" },
-  { "<leader>qd", function() require("persistence").stop() end, desc = "Stop session saver" },
 }
 
 -- SNACKS

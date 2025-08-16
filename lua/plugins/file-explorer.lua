@@ -2,7 +2,9 @@ return {
   {
     "stevearc/oil.nvim",
     -- NOTE: Need to load during startup or Neovim will use netwr to open directory passed as parameter.
-    lazy = false,
+    -- NOTE: When using auto-session, oil need to load after the restore process, so we let auto-session load oil
+    -- when it's done.
+    -- lazy = false,
     ---@module 'oil'
     ---@type oil.SetupOpts
     opts = {
