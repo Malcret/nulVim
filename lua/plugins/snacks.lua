@@ -4,11 +4,9 @@ return {
   lazy = false,
   ---@module "snacks"
   ---@type snacks.Config
-  ---@diagnostic disable-next-line: missing-fields
   opts = {
     bufdelete = { enabled = true },
     ---@type snacks.indent.Config
-    ---@diagnostic disable-next-line: missing-fields
     indent = {
       enabled = true,
       animate = { enabled = false },
@@ -25,6 +23,7 @@ return {
     statuscolumn = { enabled = true },
     terminal = { enabled = true },
     picker = {
+      enabled = true,
       layout = {
         preset = "custom",
       },
@@ -83,9 +82,15 @@ return {
             min_width = 80,
             height = 0.4,
             min_height = 3,
-            box = "vertical",
             border = "none",
-            { title = "{title}", title_pos = "center", win = "input", height = 1, border = "solid" },
+            box = "vertical",
+            {
+              win = "input",
+              height = 1,
+              border = "solid",
+              title = "{title}",
+              title_pos = "center",
+            },
             { win = "list", border = "none" },
           },
         },
